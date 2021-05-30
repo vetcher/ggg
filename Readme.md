@@ -64,13 +64,22 @@ func convertFromToTo2(in To) From {
 go get -u github.com/vetcher/ggg
 ```
 
-### How I use it?
+### How to use it?
 
 In Goland [`Preferences->Tools->External Tools`](jetbrains://GoLand/settings?name=Tools--External+Tools). 
 Add new tool `ggg` with Arguments: `-w $FilePath$`. 
 If you want, add keyboard shortcut for new tool.
 
-Also, in [`Preferences->Editor->Live Templates`](jetbrains://GoLand/settings?name=Editor--Live+Templates) you may add one,
-that would write magic comment for you. Click `Add` add fill fields like in screenshot below.
+Another approach is to add `ggg` as File Watcher and use it like `goimports`. 
+But ggg is slow for use it automatically on save, 
+so my recommendation is to run `ggg` manually via External Tools and from CLI / makefile.
 
-![Live template ggg:convert screenshot](docs/img.png)
+Also, in [`Preferences->Editor->Live Templates`](jetbrains://GoLand/settings?name=Editor--Live+Templates) you may add autocomplete,
+that would write magic comment for you.
+Click `Add` add fill fields like in screenshot below.
+
+![Live template ggg:convert screenshot](docs/livetemplate.png)
+
+After that, when writing `ggg` above function, autocomplete would appear.
+
+![Live template usage](docs/livetemplate-usage.png)
