@@ -1,0 +1,15 @@
+{% func defaultValueExprTemplate(ctx tplContext) %}
+    {%s ctx.Out.Name().Obj().Name() %}{}
+{% endfunc %}
+
+{% func structResultTemplate(ctx tplContext) %}
+{% if ctx.Out.IsPtr() %}&{% endif %}{%s ctx.Out.Name().Obj().Name() %}{
+{% for _, field := range ctx.Out.Fields() -%}
+{%- code inField := ctx.In.FieldByName(field.Name()) -%}
+{%- if inField == nil -%}
+    {%s field.Name() %}: {%s emptyField(field) %}, // todo
+    {%- continue -%}
+{%- endif -%}
+    {%s field.Name() %}: {%s= convertField(ctx.In.VarName(), inField, field) %},
+{% endfor -%}}
+{% endfunc %}
